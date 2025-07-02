@@ -155,8 +155,8 @@ nav ul li a:hover {
     box-shadow: var(--shadow-medium);
     z-index: 1;
     border-radius: 8px;
-    padding: 10px 0;
-    top: calc(100% + 10px);
+    padding: 20px 0 10px 0; 
+    top: 100%;
     left: 50%;
     transform: translateX(-50%); 
     opacity: 0; 

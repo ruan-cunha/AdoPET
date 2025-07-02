@@ -1,6 +1,8 @@
 <?php
 // AdoPET/editar_perfil.php
 require_once 'db.php';
+session_start();
+header('Content-Type: text/html; charset=utf-8');
 $page_title = 'Editar Perfil';
 
 function set_flash_message($message, $type) {
@@ -10,7 +12,7 @@ function set_flash_message($message, $type) {
 include 'templates/header.php';
 
 if (!isset($_SESSION['user_id'])) {
-    set_flash_message('Faça login para editar seu perfil.', 'warning');
+    set_flash_message('Faï¿½a login para editar seu perfil.', 'warning');
     header('Location: login.php');
     exit();
 }
@@ -57,22 +59,39 @@ $conn->close();
         <label for="nome">Nome/Nome da ONG:</label>
         <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($usuario['nome']); ?>" required>
 
-        <label for="email">E-mail (não editável):</label>
+        <label for="email">E-mail (nï¿½o editï¿½vel):</label>
         <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" disabled>
 
-        <label for="endereco">Endereço:</label>
+        <label for="endereco">Endereï¿½o:</label>
         <input type="text" id="endereco" name="endereco" value="<?php echo htmlspecialchars($usuario['endereco'] ?? ''); ?>">
 
         <label for="telefone">Telefone:</label>
         <input type="text" id="telefone" name="telefone" value="<?php echo htmlspecialchars($usuario['telefone'] ?? ''); ?>" pattern="[0-9]{10,11}" placeholder="Ex: 47988887777">
-        <small class="help-text">Apenas números, com DDD.</small>
+        <small class="help-text">Apenas nï¿½meros, com DDD.</small>
 
         <?php if ($usuario['tipo_usuario'] == 'ONG'): ?>
-            <label for="descricao">Descrição da ONG:</label>
+            <label for="descricao">Descriï¿½ï¿½o da ONG:</label>
             <textarea id="descricao" name="descricao" rows="4"><?php echo htmlspecialchars($usuario['descricao'] ?? ''); ?></textarea>
         <?php endif; ?>
 
         <button type="submit" class="btn-primary">Atualizar Perfil</button>
     </form>
 </section>
+<script src="https://unpkg.com/imask"></script>
+<script>
+    var phoneInput = document.getElementById('telefone');
+    var phoneMask = IMask(phoneInput, {
+        mask: [
+            {
+                mask: '(00) 0000-0000',
+                maxLength: 14
+            },
+            {
+                mask: '(00) 00000-0000',
+                maxLength: 15
+            }
+        ]
+    });
+</script>
+
 <?php include 'templates/footer.php'; ?>

@@ -1,6 +1,8 @@
 <?php
 // AdoPET/animal_detalhes.php
 require_once 'db.php';
+header('Content-Type: text/html; charset=utf-8');
+session_start();
 
 $animal_id = $_GET['id'] ?? 0;
 if (!$animal_id) {
@@ -21,7 +23,7 @@ $stmt->close();
 $conn->close();
 
 if (!$animal) {
-    $_SESSION['flash_message'] = ['message' => 'Animal não encontrado.', 'type' => 'danger'];
+    $_SESSION['flash_message'] = ['message' => 'Animal nï¿½o encontrado.', 'type' => 'danger'];
     header("Location: animais.php");
     exit();
 }
@@ -37,18 +39,18 @@ include 'templates/header.php';
         </div>
         <div class="detalhes-info">
             <h1><?php echo htmlspecialchars($animal['nome']); ?></h1>
-            <p><strong>Espécie:</strong> <?php echo htmlspecialchars($animal['especie']); ?></p>
-            <p><strong>Raça:</strong> <?php echo htmlspecialchars($animal['raca'] ?: 'Não informada'); ?></p>
+            <p><strong>Espï¿½cie:</strong> <?php echo htmlspecialchars($animal['especie']); ?></p>
+            <p><strong>Raï¿½a:</strong> <?php echo htmlspecialchars($animal['raca'] ?: 'Nï¿½o informada'); ?></p>
             <p><strong>Idade:</strong> <?php echo htmlspecialchars($animal['idade']); ?> anos</p>
-            <p><strong>Gênero:</strong> <?php echo htmlspecialchars($animal['genero']); ?></p>
+            <p><strong>Gï¿½nero:</strong> <?php echo htmlspecialchars($animal['genero']); ?></p>
             <p><strong>Porte:</strong> <?php echo htmlspecialchars($animal['porte']); ?></p>
-            <p><strong>Castrado:</strong> <?php echo $animal['castrado'] ? 'Sim' : 'Não'; ?></p>
-            <p><strong>Vacinado:</strong> <?php echo $animal['vacinado'] ? 'Sim' : 'Não'; ?></p>
-            <p><strong>Vermifugado:</strong> <?php echo $animal['vermifugado'] ? 'Sim' : 'Não'; ?></p>
-            <p><strong>Status:</strong> <?php echo $animal['disponivel'] ? 'Disponível para Adoção' : 'Adotado!'; ?></p>
+            <p><strong>Castrado:</strong> <?php echo $animal['castrado'] ? 'Sim' : 'Nï¿½o'; ?></p>
+            <p><strong>Vacinado:</strong> <?php echo $animal['vacinado'] ? 'Sim' : 'Nï¿½o'; ?></p>
+            <p><strong>Vermifugado:</strong> <?php echo $animal['vermifugado'] ? 'Sim' : 'Nï¿½o'; ?></p>
+            <p><strong>Status:</strong> <?php echo $animal['disponivel'] ? 'Disponï¿½vel para Adoï¿½ï¿½o' : 'Adotado!'; ?></p>
             <p><strong>Sobre mim:</strong> <?php echo nl2br(htmlspecialchars($animal['descricao'])); ?></p>
 
-            <h3>Contato para Adoção:</h3>
+            <h3>Contato para Adoï¿½ï¿½o:</h3>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <p><strong>Doador(a):</strong> <?php echo htmlspecialchars($animal['nome_doador']); ?></p>
                 <p><strong>Email:</strong> <a href="mailto:<?php echo htmlspecialchars($animal['email_doador']); ?>"><?php echo htmlspecialchars($animal['email_doador']); ?></a></p>
@@ -60,16 +62,16 @@ include 'templates/header.php';
                         <form action="manifestar_interesse.php" method="POST">
                             <input type="hidden" name="animal_id" value="<?php echo $animal['id']; ?>">
                             <label for="mensagem">Deixe uma mensagem para o doador:</label>
-                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte um pouco sobre você e por que gostaria de adotar este animal." required></textarea>
+                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte um pouco sobre vocï¿½ e por que gostaria de adotar este animal." required></textarea>
                             <button type="submit" class="btn-primary">Enviar Interesse</button>
                         </form>
                     </div>
                 <?php elseif ($_SESSION['user_id'] == $animal['id_usuario']): ?>
-                    <p class="info-message">Este é um dos seus animais. Acesse o <a href="dashboard.php">painel</a> para gerenciá-lo.</p>
+                    <p class="info-message">Este ï¿½ um dos seus animais. Acesse o <a href="dashboard.php">painel</a> para gerenciï¿½-lo.</p>
                 <?php endif; ?>
 
             <?php else: ?>
-                <p>Faça <a href="login.php">login</a> para ver os dados de contato do doador e manifestar interesse.</p>
+                <p>Faï¿½a <a href="login.php">login</a> para ver os dados de contato do doador e manifestar interesse.</p>
             <?php endif; ?>
         </div>
     </div>

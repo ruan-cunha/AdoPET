@@ -1,6 +1,6 @@
 <?php
 // AdoPET/templates/header.php
-session_start();
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,13 +17,13 @@ session_start();
         <nav>
             <div class="logo"><a href="index.php">AdoPET</a></div>
             <ul>
-                <li><a href="index.php">InÌcio</a></li>
-                <li><a href="animais.php">Animais DisponÌveis</a></li>
-                <li><a href="sobre.php">Sobre NÛs</a></li>
+                <li><a href="index.php">In√≠cio</a></li>
+                <li><a href="animais.php">Animais Dispon√≠veis</a></li>
+                <li><a href="sobre.php">Sobre N√≥s</a></li>
                 <li><a href="contato.php">Contato</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="user-menu">
-                        <a href="dashboard.php" class="user-name">Ol·, <?php echo explode(' ', $_SESSION['user_name'])[0]; ?>!</a>
+                        <a href="dashboard.php" class="user-name">Ol√°, <?php echo explode(' ', $_SESSION['user_name'])[0]; ?>!</a>
                         <ul class="dropdown-content">
                             <li><a href="dashboard.php">Meu Painel</a></li>
                             <li><a href="editar_perfil.php">Editar Perfil</a></li>

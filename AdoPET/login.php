@@ -1,6 +1,8 @@
 <?php
 // AdoPET/login.php
 require_once 'db.php';
+session_start();
+header('Content-Type: text/html; charset=utf-8');
 $page_title = 'Login na AdoPET';
 
 function set_flash_message($message, $type) {
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: dashboard.php");
         exit();
     } else {
-        set_flash_message('Email ou senha inválidos.', 'danger');
+        set_flash_message('Email ou senha invï¿½lidos.', 'danger');
         header("Location: login.php");
         exit();
     }
@@ -48,7 +50,7 @@ include 'templates/header.php';
 
         <button type="submit" class="btn-primary">Entrar</button>
     </form>
-    <p>Ainda não tem conta? <a href="cadastro.php">Cadastre-se aqui!</a></p>
+    <p>Ainda nï¿½o tem conta? <a href="cadastro.php">Cadastre-se aqui!</a></p>
 </section>
 
 <?php include 'templates/footer.php'; ?>

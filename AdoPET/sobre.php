@@ -1,23 +1,25 @@
 <?php
 // AdoPET/sobre.php
 $page_title = 'Sobre a AdoPET';
+session_start();
+header('Content-Type: text/html; charset=utf-8');
 include 'templates/header.php';
 ?>
 <section class="static-page-content">
     <h1>Sobre a AdoPET</h1>
-    <p>Bem-vindo à AdoPET, sua plataforma dedicada a conectar animais necessitados com lares amorosos e responsáveis. Acreditamos que todo pet merece uma segunda chance e um lar cheio de carinho.</p>
+    <p>Bem-vindo ï¿½ AdoPET, sua plataforma dedicada a conectar animais necessitados com lares amorosos e responsï¿½veis. Acreditamos que todo pet merece uma segunda chance e um lar cheio de carinho.</p>
 
-    <h2>Nossa Missão</h2>
-    <p>Nossa missão é simplificar o processo de adoção, tornando-o acessível e seguro para todos. Queremos facilitar a vida de ONGs, protetores independentes e pessoas físicas que desejam doar animais, ao mesmo tempo em que proporcionamos aos futuros tutores uma maneira fácil e intuitiva de encontrar seu novo melhor amigo.</p>
+    <h2>Nossa Missï¿½o</h2>
+    <p>Nossa missï¿½o ï¿½ simplificar o processo de adoï¿½ï¿½o, tornando-o acessï¿½vel e seguro para todos. Queremos facilitar a vida de ONGs, protetores independentes e pessoas fï¿½sicas que desejam doar animais, ao mesmo tempo em que proporcionamos aos futuros tutores uma maneira fï¿½cil e intuitiva de encontrar seu novo melhor amigo.</p>
 
     <h2>Nossos Valores</h2>
     <ul>
-        <li><strong>Amor e Respeito:</strong> Todo animal é digno de amor, respeito e cuidado.</li>
-        <li><strong>Transparência:</strong> Promovemos um processo de adoção claro e honesto.</li>
-        <li><strong>Responsabilidade:</strong> Encorajamos a adoção responsável e a posse consciente.</li>
-        <li><strong>Comunidade:</strong> Construímos uma comunidade de pessoas apaixonadas por animais.</li>
+        <li><strong>Amor e Respeito:</strong> Todo animal ï¿½ digno de amor, respeito e cuidado.</li>
+        <li><strong>Transparï¿½ncia:</strong> Promovemos um processo de adoï¿½ï¿½o claro e honesto.</li>
+        <li><strong>Responsabilidade:</strong> Encorajamos a adoï¿½ï¿½o responsï¿½vel e a posse consciente.</li>
+        <li><strong>Comunidade:</strong> Construï¿½mos uma comunidade de pessoas apaixonadas por animais.</li>
     </ul>
 
-    <p>Junte-se à família AdoPET e ajude-nos a criar um futuro mais feliz para milhões de animais!</p>
+    <p>Junte-se ï¿½ famï¿½lia AdoPET e ajude-nos a criar um futuro mais feliz para milhï¿½es de animais!</p>
 </section>
 <?php include 'templates/footer.php'; ?>

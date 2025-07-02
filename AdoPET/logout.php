@@ -1,7 +1,8 @@
 <?php
 // AdoPET/logout.php
 session_start();
-$_SESSION['flash_message'] = ['message' => 'Você foi desconectado(a).', 'type' => 'info'];
+header('Content-Type: text/html; charset=utf-8');
+$_SESSION['flash_message'] = ['message' => 'Vocï¿½ foi desconectado(a).', 'type' => 'info'];
 
 $_SESSION = array();
 

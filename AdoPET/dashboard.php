@@ -1,6 +1,8 @@
 <?php
 // AdoPET/dashboard.php
 require_once 'db.php';
+session_start();
+header('Content-Type: text/html; charset=utf-8');
 $page_title = 'Meu Painel - AdoPET';
 
 function set_flash_message($message, $type) {
@@ -10,7 +12,7 @@ function set_flash_message($message, $type) {
 include 'templates/header.php';
 
 if (!isset($_SESSION['user_id'])) {
-    set_flash_message('Por favor, faça login para acessar esta página.', 'warning');
+    set_flash_message('Por favor, faï¿½a login para acessar esta pï¿½gina.', 'warning');
     header('Location: login.php');
     exit();
 }
@@ -71,15 +73,15 @@ $conn->close();
 ?>
 
 <section class="dashboard">
-    <h1>Olá, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h1>
+    <h1>Olï¿½, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</h1>
 
     <div class="profile-info-summary">
-        <p><strong>Tipo de Usuário:</strong> <?php echo htmlspecialchars($perfil_usuario['tipo_usuario']); ?></p>
+        <p><strong>Tipo de Usuï¿½rio:</strong> <?php echo htmlspecialchars($perfil_usuario['tipo_usuario']); ?></p>
         <p><strong>E-mail:</strong> <?php echo htmlspecialchars($perfil_usuario['email']); ?></p>
-        <p><strong>Telefone:</strong> <?php echo htmlspecialchars($perfil_usuario['telefone'] ?: 'Não informado'); ?></p>
-        <p><strong>Endereço:</strong> <?php echo htmlspecialchars($perfil_usuario['endereco'] ?: 'Não informado'); ?></p>
+        <p><strong>Telefone:</strong> <?php echo htmlspecialchars($perfil_usuario['telefone'] ?: 'Nï¿½o informado'); ?></p>
+        <p><strong>Endereï¿½o:</strong> <?php echo htmlspecialchars($perfil_usuario['endereco'] ?: 'Nï¿½o informado'); ?></p>
         <?php if ($perfil_usuario['tipo_usuario'] == 'ONG'): ?>
-            <p><strong>Descrição da ONG:</strong> <?php echo htmlspecialchars($perfil_usuario['descricao'] ?: 'Não informada'); ?></p>
+            <p><strong>Descriï¿½ï¿½o da ONG:</strong> <?php echo htmlspecialchars($perfil_usuario['descricao'] ?: 'Nï¿½o informada'); ?></p>
         <?php endif; ?>
         <a href="editar_perfil.php" class="btn-secondary">Editar Perfil</a>
     </div>
@@ -96,7 +98,7 @@ $conn->close();
                     <div class="animal-card <?php echo !$animal['disponivel'] ? 'card-adotado' : ''; ?>">
                         <img src="uploads/<?php echo htmlspecialchars($animal['foto_url']); ?>" alt="Foto do <?php echo htmlspecialchars($animal['nome']); ?>">
                         <h3><?php echo htmlspecialchars($animal['nome']); ?></h3>
-                        <p><?php echo htmlspecialchars($animal['especie']); ?> - <?php echo $animal['disponivel'] ? '<span class="status-badge status-disponivel">Disponível</span>' : '<span class="status-badge status-adotado">Adotado</span>'; ?></p>
+                        <p><?php echo htmlspecialchars($animal['especie']); ?> - <?php echo $animal['disponivel'] ? '<span class="status-badge status-disponivel">Disponï¿½vel</span>' : '<span class="status-badge status-adotado">Adotado</span>'; ?></p>
                         <div class="card-actions">
                             <a href="animal_detalhes.php?id=<?php echo $animal['id']; ?>" class="btn-small btn-secondary">Ver</a>
                             <a href="editar_animal.php?id=<?php echo $animal['id']; ?>" class="btn-small btn-edit">Editar</a>
@@ -104,7 +106,7 @@ $conn->close();
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="info-message">Você ainda não cadastrou nenhum animal.</p>
+                <p class="info-message">Vocï¿½ ainda nï¿½o cadastrou nenhum animal.</p>
             <?php endif; ?>
         </div>
 
@@ -164,7 +166,7 @@ $conn->close();
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
-            <p class="info-message">Você ainda não manifestou interesse em nenhum animal.</p>
+            <p class="info-message">Vocï¿½ ainda nï¿½o manifestou interesse em nenhum animal.</p>
         <?php endif; ?>
     <?php endif; ?>
 

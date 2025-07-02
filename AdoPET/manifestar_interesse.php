@@ -1,6 +1,7 @@
 <?php
 // AdoPET/manifestar_interesse.php
 require_once 'db.php';
+header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 function set_flash_message($message, $type) {
@@ -8,7 +9,7 @@ function set_flash_message($message, $type) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    set_flash_message('Faça login para manifestar interesse.', 'warning');
+    set_flash_message('Faï¿½a login para manifestar interesse.', 'warning');
     header('Location: login.php');
     exit();
 }
@@ -30,12 +31,12 @@ if (empty($mensagem) || strlen($mensagem) < 10) {
 
 $conn = get_db_connection();
 
-// Checar se já existe um interesse ativo
+// Checar se jï¿½ existe um interesse ativo
 $stmt = $conn->prepare("SELECT id FROM interesses_adocao WHERE id_animal = ? AND id_interessado = ? AND status IN ('Pendente', 'Aprovado')");
 $stmt->bind_param("ii", $animal_id, $id_interessado);
 $stmt->execute();
 if ($stmt->get_result()->num_rows > 0) {
-    set_flash_message('Você já tem um interesse ativo neste animal. Verifique seu painel.', 'info');
+    set_flash_message('Vocï¿½ jï¿½ tem um interesse ativo neste animal. Verifique seu painel.', 'info');
     header('Location: animal_detalhes.php?id=' . $animal_id);
     exit();
 }
@@ -45,7 +46,7 @@ $stmt = $conn->prepare("INSERT INTO interesses_adocao (id_animal, id_interessado
 $stmt->bind_param("iis", $animal_id, $id_interessado, $mensagem);
 
 if ($stmt->execute()) {
-    set_flash_message('Seu interesse foi registrado com sucesso! O doador será notificado.', 'success');
+    set_flash_message('Seu interesse foi registrado com sucesso! O doador serï¿½ notificado.', 'success');
 } else {
     set_flash_message('Erro ao registrar interesse: ' . $stmt->error, 'danger');
 }

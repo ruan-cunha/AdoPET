@@ -1,7 +1,9 @@
-<?php
+ï»¿<?php
 // AdoPET/index.php
 require_once 'db.php';
-$page_title = 'Seu Novo Melhor Amigo Espera Por Você!';
+session_start();
+header('Content-Type: text/html; charset=utf-8');
+$page_title = 'Seu Novo Melhor Amigo Espera Por Vocï¿½!';
 include 'templates/header.php';
 
 $conn = get_db_connection();
@@ -30,7 +32,7 @@ try {
     if ($result_parceiros) $stats['parceiros'] = $result_parceiros->fetch_assoc()['total'];
 
 } catch (Exception $e) {
-    $_SESSION['flash_message'] = ['message' => 'Não foi possível carregar os dados da página inicial.', 'type' => 'danger'];
+    $_SESSION['flash_message'] = ['message' => 'Nï¿½o foi possï¿½vel carregar os dados da pï¿½gina inicial.', 'type' => 'danger'];
 }
 $conn->close();
 
@@ -39,32 +41,32 @@ $conn->close();
 <section class="hero">
     <div class="hero-content">
         <h1>Encontre o Amor de Quatro Patas na AdoPET!</h1>
-        <p>Milhares de animais resgatados esperam por um lar cheio de carinho e segurança. Dê uma segunda chance, adote!</p>
-        <a href="animais.php" class="btn-primary">Ver Animais Disponíveis</a>
+        <p>Milhares de animais resgatados esperam por um lar cheio de carinho e seguranï¿½a. Dï¿½ uma segunda chance, adote!</p>
+        <a href="animais.php" class="btn-primary">Ver Animais Disponï¿½veis</a>
     </div>
 </section>
 
 <section class="container section-padding how-it-works">
-    <h2 class="section-heading">Adotar é Simples!</h2>
-    <p class="section-subheading">Em apenas 3 passos, você pode mudar uma vida para sempre.</p>
+    <h2 class="section-heading">Adotar ï¿½ Simples!</h2>
+    <p class="section-subheading">Em apenas 3 passos, vocï¿½ pode mudar uma vida para sempre.</p>
     <div class="steps-grid">
         <div class="step-item">
             <div class="step-icon"><i class="fas fa-search"></i></div>
             <div class="step-number">1</div>
             <h3>Explore e Encontre</h3>
-            <p>Navegue pelos perfis de cães e gatos. Use nossos filtros para achar o pet com a sua vibe!</p>
+            <p>Navegue pelos perfis de cï¿½es e gatos. Use nossos filtros para achar o pet com a sua vibe!</p>
         </div>
         <div class="step-item">
             <div class="step-icon"><i class="fas fa-heart"></i></div>
             <div class="step-number">2</div>
             <h3>Manifeste Interesse</h3>
-            <p>Achou seu futuro amigo? Preencha um formulário simples para o doador conhecer um pouco sobre você.</p>
+            <p>Achou seu futuro amigo? Preencha um formulï¿½rio simples para o doador conhecer um pouco sobre vocï¿½.</p>
         </div>
         <div class="step-item">
             <div class="step-icon"><i class="fas fa-home"></i></div>
             <div class="step-number">3</div>
             <h3>Prepare o Lar</h3>
-            <p>Após a aprovação, combine a entrega e prepare sua casa para receber o mais novo membro da família!</p>
+            <p>Apï¿½s a aprovaï¿½ï¿½o, combine a entrega e prepare sua casa para receber o mais novo membro da famï¿½lia!</p>
         </div>
     </div>
 </section>
@@ -72,7 +74,7 @@ $conn->close();
 <section class="bg-light-purple section-padding">
     <div class="container">
         <h2 class="section-heading">Nossos Anjinhos em Destaque</h2>
-        <p class="section-subheading">Essas fofuras estão ansiosas por um sofá pra chamar de seu. Veja se não rola um match!</p>
+        <p class="section-subheading">Essas fofuras estï¿½o ansiosas por um sofï¿½ pra chamar de seu. Veja se nï¿½o rola um match!</p>
         <div class="galeria-animais">
             <?php if (!empty($animais_destaque)): ?>
                 <?php foreach ($animais_destaque as $animal): ?>
@@ -89,7 +91,7 @@ $conn->close();
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="info-message text-center">Nenhum animal em destaque no momento. <a href="animais.php">Veja todos os animais disponíveis!</a></p>
+                <p class="info-message text-center">Nenhum animal em destaque no momento. <a href="animais.php">Veja todos os animais disponï¿½veis!</a></p>
             <?php endif; ?>
         </div>
          <div class="text-center mt-5">
@@ -100,7 +102,7 @@ $conn->close();
 
 <section class="stats-section section-padding">
     <div class="container">
-        <h2 class="section-heading light-text">Nossa Causa em Números</h2>
+        <h2 class="section-heading light-text">Nossa Causa em Nï¿½meros</h2>
         <div class="stats-grid">
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-paw"></i></div>
@@ -110,7 +112,7 @@ $conn->close();
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-users"></i></div>
                 <h3 class="stat-number" data-target="<?php echo $stats['familias_felizes']; ?>">0</h3>
-                <p class="stat-label">Famílias Felizes</p>
+                <p class="stat-label">Famï¿½lias Felizes</p>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-hands-helping"></i></div>

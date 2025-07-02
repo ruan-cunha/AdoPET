@@ -18,7 +18,6 @@ function get_db_connection() {
         $conn->set_charset("utf8");
         return $conn;
     } catch (Exception $e) {
-        // Em um ambiente de produção, seria melhor logar o erro do que exibi-lo.
         die("Erro ao conectar ao banco de dados: " . $e->getMessage());
     }
 }

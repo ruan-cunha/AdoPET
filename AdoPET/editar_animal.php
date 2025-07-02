@@ -1,6 +1,8 @@
 <?php
 // AdoPET/editar_animal.php
 require_once 'db.php';
+session_start();
+header('Content-Type: text/html; charset=utf-8');
 $page_title = 'Editar Animal';
 
 function set_flash_message($message, $type) {
@@ -10,7 +12,7 @@ function set_flash_message($message, $type) {
 include 'templates/header.php';
 
 if (!isset($_SESSION['user_id'])) {
-    set_flash_message('Faça login para editar um animal.', 'warning');
+    set_flash_message('Faï¿½a login para editar um animal.', 'warning');
     header('Location: login.php');
     exit();
 }
@@ -31,7 +33,7 @@ $animal = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 if (!$animal) {
-    set_flash_message('Animal não encontrado ou você não tem permissão para editá-lo.', 'danger');
+    set_flash_message('Animal nï¿½o encontrado ou vocï¿½ nï¿½o tem permissï¿½o para editï¿½-lo.', 'danger');
     header('Location: dashboard.php');
     exit();
 }
@@ -89,7 +91,7 @@ $conn->close();
         <label for="nome">Nome do Animal:</label>
         <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($animal['nome']); ?>" required>
 
-        <label for="especie">Espécie:</label>
+        <label for="especie">Espï¿½cie:</label>
         <select name="especie" id="especie" required>
             <option value="Cachorro" <?php if($animal['especie'] == 'Cachorro') echo 'selected'; ?>>Cachorro</option>
             <option value="Gato" <?php if($animal['especie'] == 'Gato') echo 'selected'; ?>>Gato</option>
@@ -100,10 +102,10 @@ $conn->close();
             <label><input type="checkbox" name="castrado" <?php if($animal['castrado']) echo 'checked'; ?>> Castrado</label>
             <label><input type="checkbox" name="vacinado" <?php if($animal['vacinado']) echo 'checked'; ?>> Vacinado</label>
             <label><input type="checkbox" name="vermifugado" <?php if($animal['vermifugado']) echo 'checked'; ?>> Vermifugado</label>
-            <label><input type="checkbox" name="disponivel" <?php if($animal['disponivel']) echo 'checked'; ?>> Disponível para Adoção</label>
+            <label><input type="checkbox" name="disponivel" <?php if($animal['disponivel']) echo 'checked'; ?>> Disponï¿½vel para Adoï¿½ï¿½o</label>
         </div>
 
-        <label for="descricao">Descrição e Personalidade:</label>
+        <label for="descricao">Descriï¿½ï¿½o e Personalidade:</label>
         <textarea id="descricao" name="descricao" rows="6" required><?php echo htmlspecialchars($animal['descricao']); ?></textarea>
 
         <label for="foto">Alterar Foto do Animal:</label>

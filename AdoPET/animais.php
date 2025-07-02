@@ -1,7 +1,8 @@
 <?php
 // AdoPET/animais.php
+header('Content-Type: text/html; charset=utf-8');
 require_once 'db.php';
-$page_title = 'Animais Disponíveis para Adoção';
+$page_title = 'Animais DisponÃ­veis para AdoÃ§Ã£o';
 include 'templates/header.php';
 
 $conn = get_db_connection();
@@ -11,6 +12,15 @@ $query = "SELECT a.*, u.nome as nome_doador FROM animais a JOIN usuarios u ON a.
 $params = [];
 $types = '';
 $conditions = [];
+
+$search_term = $_GET['search'] ?? '';
+if (!empty($search_term)) {
+    $conditions[] = "(a.nome LIKE ? OR a.descricao LIKE ?)";
+    $like_term = '%' . $search_term . '%';
+    $params[] = $like_term;
+    $params[] = $like_term;
+    $types .= 'ss';
+}
 
 $especie_sel = $_GET['especie'] ?? '';
 if ($especie_sel) {
@@ -50,13 +60,19 @@ $stmt->close();
 $conn->close();
 ?>
 
-<section class="animais-disponiveis">
-    <h2>Animais Disponíveis para Adoção</h2>
+<section class="container" style="padding-top: 20px;">
+    <h2 class="section-heading">Animais para AdoÃ§Ã£o</h2>
 
     <div class="filtros">
+        <h3>Encontre seu novo amigo</h3>
         <form action="animais.php" method="GET">
+            <div class="filter-group search-bar" style="grid-column: 1 / -1;">
+                 <label for="search" style="display: none;">Buscar</label>
+                 <input type="text" name="search" id="search" placeholder="Busque por nome ou palavra-chave..." value="<?php echo htmlspecialchars($search_term); ?>">
+            </div>
+
             <div class="filter-group">
-                <label for="especie">Espécie:</label>
+                <label for="especie">EspÃ©cie:</label>
                 <select name="especie" id="especie">
                     <option value="">Todas</option>
                     <option value="Cachorro" <?php echo ($especie_sel == 'Cachorro') ? 'selected' : ''; ?>>Cachorro</option>
@@ -70,21 +86,21 @@ $conn->close();
                 <select name="porte" id="porte">
                     <option value="">Todos</option>
                     <option value="Pequeno" <?php echo ($porte_sel == 'Pequeno') ? 'selected' : ''; ?>>Pequeno</option>
-                    <option value="Medio" <?php echo ($porte_sel == 'Medio') ? 'selected' : ''; ?>>Médio</option>
+                    <option value="Medio" <?php echo ($porte_sel == 'Medio') ? 'selected' : ''; ?>>MÃ©dio</option>
                     <option value="Grande" <?php echo ($porte_sel == 'Grande') ? 'selected' : ''; ?>>Grande</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="genero">Gênero:</label>
+                <label for="genero">GÃªnero:</label>
                 <select name="genero" id="genero">
                     <option value="">Ambos</option>
                     <option value="Macho" <?php echo ($genero_sel == 'Macho') ? 'selected' : ''; ?>>Macho</option>
-                    <option value="Fêmea" <?php echo ($genero_sel == 'Fêmea') ? 'selected' : ''; ?>>Fêmea</option>
+                    <option value="FÃªmea" <?php echo ($genero_sel == 'FÃªmea') ? 'selected' : ''; ?>>FÃªmea</option>
                 </select>
             </div>
             
-            <button type="submit" class="btn-secondary">Filtrar</button>
+            <button type="submit" class="btn-secondary" style="grid-column: 1 / -1;">Filtrar e Buscar</button>
         </form>
     </div>
 
@@ -94,13 +110,15 @@ $conn->close();
                 <div class="animal-card">
                     <img src="uploads/<?php echo htmlspecialchars($animal['foto_url']); ?>" alt="Foto do <?php echo htmlspecialchars($animal['nome']); ?>">
                     <h3><?php echo htmlspecialchars($animal['nome']); ?></h3>
-                    <p><?php echo htmlspecialchars($animal['especie']); ?> - <?php echo htmlspecialchars($animal['idade']); ?> anos</p>
-                    <p>Doador: <?php echo htmlspecialchars($animal['nome_doador']); ?></p>
-                    <a href="animal_detalhes.php?id=<?php echo $animal['id']; ?>" class="btn-primary">Ver Detalhes</a>
+                    <p><?php echo htmlspecialchars($animal['especie']); ?> - <?php echo htmlspecialchars($animal['idade'] ?? '?'); ?> anos</p>
+                    <p>Doador(a): <?php echo htmlspecialchars($animal['nome_doador']); ?></p>
+                    <div class="card-actions">
+                        <a href="animal_detalhes.php?id=<?php echo $animal['id']; ?>" class="btn-primary btn-small">Ver Detalhes</a>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>Nenhum animal disponível com os filtros selecionados.</p>
+            <p class="info-message" style="text-align: center; grid-column: 1 / -1;">Nenhum animal encontrado com os filtros selecionados.</p>
         <?php endif; ?>
     </div>
 </section>

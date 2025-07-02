@@ -1,16 +1,14 @@
 <?php
-// AdoPET/gerenciar_interesse.php
-require_once 'db.php';
-session_start();
-
-function set_flash_message($message, $type) {
-    $_SESSION['flash_message'] = ['message' => $message, 'type' => $type];
-}
+require_once 'helpers.php';
 
 if (!isset($_SESSION['user_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: login.php');
     exit();
 }
+
+validate_csrf_token(); 
+
+require_once 'db.php';
 
 $interesse_id = $_POST['interesse_id'];
 $action = $_POST['action'];
@@ -25,7 +23,7 @@ $interesse_info = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 if (!$interesse_info || $interesse_info['id_usuario'] != $user_id) {
-    set_flash_message('Você não tem permissão para gerenciar este interesse.', 'danger');
+    set_flash_message('VocÃª nÃ£o tem permissÃ£o para gerenciar este interesse.', 'danger');
     header('Location: dashboard.php');
     exit();
 }
@@ -46,6 +44,7 @@ switch ($action) {
 
         $conn->begin_transaction();
         try {
+
             $stmt_animal = $conn->prepare("UPDATE animais SET disponivel = FALSE WHERE id = ?");
             $stmt_animal->bind_param("i", $interesse_info['id_animal']);
             $stmt_animal->execute();
